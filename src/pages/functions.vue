@@ -1,5 +1,6 @@
 <template>
   <div>
-    <RouterView />
+    func
+    <!-- <RouterView /> -->
   </div>
 </template>

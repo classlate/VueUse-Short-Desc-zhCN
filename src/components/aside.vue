@@ -1,13 +1,9 @@
 <script setup lang="ts">
-interface MenuItem {
-  title: string
-  index: string
-  children?: MenuItem[]
-}
-const { list } = defineProps<{
-  list: MenuItem[]
-}>()
+import type { MenuItem } from '~/types'
 
+const { menuList } = defineProps<{
+  menuList: MenuItem[]
+}>()
 </script>
 
 <template>
@@ -16,14 +12,22 @@ const { list } = defineProps<{
       <el-menu
         :router="true"
         :default-active="'0'"
-        :default-openeds="['1', '3']"
+        :default-openeds="[menuList[0]?.index]"
       >
-        <el-sub-menu index="1">
+        <el-sub-menu
+          v-for="menu in menuList"
+          :key="menu.index"
+          :index="menu.index"
+        >
           <template #title>
-            Navigator One
+            {{ menu.title }}
           </template>
-          <el-menu-item index="1-3">
-            Option 3
+          <el-menu-item
+            v-for="child in menu.children"
+            :key="child.index"
+            :index="child.index"
+          >
+            {{ child.title }}
           </el-menu-item>
         </el-sub-menu>
       </el-menu>
