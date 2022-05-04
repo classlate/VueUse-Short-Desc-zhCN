@@ -28,6 +28,11 @@ export default defineConfig({
       },
     }),
   ],
+  theme: {
+    colors: {
+      bdc: '#dcdfe6',
+    },
+  },
   // transformers: [
   //   transformerDirectives(),
   //   transformerVariantGroup(),

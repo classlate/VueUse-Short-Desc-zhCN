@@ -45,6 +45,14 @@ export default defineConfig({
     // see unocss.config.ts for config
     Unocss(),
   ],
+  css: {
+    postcss: {
+      plugins: [
+        require('postcss-nested'),
+        require('autoprefixer'),
+      ],
+    },
+  },
 
   // https://github.com/vitest-dev/vitest
   test: {

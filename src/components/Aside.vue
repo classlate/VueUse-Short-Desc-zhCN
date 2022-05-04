@@ -7,7 +7,10 @@ const { menuList } = defineProps<{
 </script>
 
 <template>
-  <el-aside width="200px">
+  <el-aside
+    b="r-1 bdc"
+    width="200px"
+  >
     <el-scrollbar>
       <el-menu
         :router="true"
@@ -28,6 +31,12 @@ const { menuList } = defineProps<{
             :index="child.index"
           >
             {{ child.title }}
+            <span
+              b="1 rd gray-300"
+              c-gray-400
+              ml-2 px-1
+              lh-4
+            >{{ child.nums }}</span>
           </el-menu-item>
         </el-sub-menu>
       </el-menu>

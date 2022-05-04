@@ -1,30 +1,22 @@
+import { core } from './core'
 import type { MenuItem } from '~/types'
 
-const findChildren = (parentName: string): any => {
-  const pages = import.meta.glob('~/pages/*/*.vue')
-  const pathList = Object.keys(pages).map(page => page.split('pages')[1])
-  const children = pathList.reduce((acc, val) => {
-    if (val.slice(1).startsWith(parentName)) {
-      acc.push({
-        title: val.split('/')[2].split('.')[0],
-        // index: acc.length.toString(),
-        index: val.split('.')[0],
-        path: val.split('.')[0],
-      })
-    }
+// export const functions = Object.keys(functionsInfo)
 
-    return acc
-  }, [] as MenuItem[])
-  return children
+const menuInfo = {
+  core: Object.entries(core),
 }
 
-const firstMenuNameList = [
-  'functions',
-]
+type Key = keyof typeof menuInfo
 
-export const menuList: MenuItem[] = firstMenuNameList.map(name => ({
-  title: name,
-  index: name,
-  path: name,
-  children: findChildren(name),
+export const menuList: MenuItem[] = Object.keys(menuInfo).map(key => ({
+  title: key,
+  index: key,
+  path: `/${key}`,
+  children: menuInfo[key as Key].map(sub => ({
+    title: sub[0],
+    index: `/${key}/${sub[0]}`,
+    path: `/${key}/${sub[0]}`,
+    nums: sub?.[1].length ?? 0,
+  })),
 }))

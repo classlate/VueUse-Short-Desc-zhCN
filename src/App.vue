@@ -3,12 +3,21 @@ import { menuList } from '~/composables'
 </script>
 
 <template>
-  <!-- <el-container style="height: 500px">
+  <el-container id="container" style="height: 100vh; max-height: 100vh;">
     <Aside
       :menu-list="menuList"
     />
 
-    <RouterView />
-  </el-container> -->
-  <RouterView />
+    <div flex-1 self-center>
+      <RouterView />
+    </div>
+  </el-container>
 </template>
+
+<style lang="postcss">
+#container {
+  .el-menu {
+    border: none;
+  }
+}
+</style>
