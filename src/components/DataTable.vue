@@ -10,10 +10,11 @@ const props = withDefaults(defineProps<Props>(), {
   target: 'core',
 })
 
-const getHref = (name: string, outLink?: string) => {
-  return outLink !== undefined
-    ? outLink
-    : `${baseURL}/${props.target}/${name}/`
+const getHref = ({ url, name, type }: MenuItemDataInfo) => {
+  const target = type ?? props.target
+  return url !== undefined
+    ? url
+    : `${baseURL}/${target}/${name}/`
 }
 
 const tableProps = reactive({
@@ -34,7 +35,7 @@ const tableProps = reactive({
     <el-table-column prop="name" label="名称" width="240px">
       <template #default="{ row }: { row: MenuItemDataInfo }">
         <a
-          :href="getHref(row.name, row.url)"
+          :href="getHref(row)"
           target="_blank"
         >
           <span c-blue-400>{{ row.name }}</span>

@@ -9,6 +9,7 @@ export interface MenuItem {
 export interface MenuItemDataInfo {
   index?: number
   url?: string
+  type?: 'shared'
   name: string
   desc: string
   demo: boolean
