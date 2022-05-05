@@ -4,6 +4,10 @@ import type { MenuItem } from '~/types'
 const { menuList } = defineProps<{
   menuList: MenuItem[]
 }>()
+
+const route = useRoute()
+const defaultActive = computed(() => route.path)
+const defaultOpeneds = computed(() => route.path.split('/').filter(Boolean).slice(0, 1))
 </script>
 
 <template>
@@ -14,8 +18,9 @@ const { menuList } = defineProps<{
     <el-scrollbar>
       <el-menu
         :router="true"
-        :default-active="'0'"
-        :default-openeds="[menuList[0]?.index]"
+        :default-active="defaultActive"
+        :default-openeds="defaultOpeneds.length ? defaultOpeneds : [menuList[0]?.index]"
+        unique-opened
       >
         <el-sub-menu
           v-for="menu in menuList"
