@@ -1,4 +1,5 @@
 export * from './dark'
 export * from './menus'
 export * from './core'
+export * from './addons'
 export * from './url'

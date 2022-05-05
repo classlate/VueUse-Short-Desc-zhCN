@@ -24,7 +24,7 @@ const tableProps = reactive({
     <el-table-column prop="name" label="名称" width="240px">
       <template #default="{ row }">
         <a
-          :href="`${baseURL}/${target || 'core'}/${row.name}/`"
+          :href="`${baseURL}/${target ?? 'core'}/${row.name}/`"
         >
           <span c-blue-400>{{ row.name }}</span>
         </a>

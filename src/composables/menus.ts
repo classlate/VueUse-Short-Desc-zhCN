@@ -1,10 +1,12 @@
 import { core } from './core'
+import { addons } from './addons'
 import type { MenuItem } from '~/types'
 
 // export const functions = Object.keys(functionsInfo)
 
 const menuInfo = {
   core: Object.entries(core),
+  addons: Object.entries(addons),
 }
 
 type Key = keyof typeof menuInfo
