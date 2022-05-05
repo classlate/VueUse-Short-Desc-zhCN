@@ -8,6 +8,7 @@ export interface MenuItem {
 
 export interface MenuItemDataInfo {
   index?: number
+  url?: string
   name: string
   desc: string
   demo: boolean

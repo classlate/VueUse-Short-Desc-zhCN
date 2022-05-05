@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import { baseURL } from '~/composables'
 import type { MenuItemDataInfo } from '~/types'
-const { tableData } = defineProps<{
+
+interface Props {
   tableData: MenuItemDataInfo[]
   target?: string
-}>()
+}
+const props = withDefaults(defineProps<Props>(), {
+  target: 'core',
+})
+
+const getHref = (name: string, outLink?: string) => {
+  return outLink !== undefined
+    ? outLink
+    : `${baseURL}/${props.target}/${name}/`
+}
 
 const tableProps = reactive({
   rowKey: 'name',
@@ -16,15 +26,16 @@ const tableProps = reactive({
 
 <template>
   <el-table
-    :data="tableData"
+    :data="props.tableData"
     height="100vh"
     stripe
     v-bind="tableProps"
   >
     <el-table-column prop="name" label="名称" width="240px">
-      <template #default="{ row }">
+      <template #default="{ row }: { row: MenuItemDataInfo }">
         <a
-          :href="`${baseURL}/${target ?? 'core'}/${row.name}/`"
+          :href="getHref(row.name, row.url)"
+          target="_blank"
         >
           <span c-blue-400>{{ row.name }}</span>
         </a>
